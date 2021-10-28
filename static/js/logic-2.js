@@ -13,16 +13,21 @@ var svg = d3.select("#my_dataviz")
         "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
+//Connect to database not the CSV
 d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
 
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
-  var myGroups = d3.map(data, function(d){return d.group;}).keys()
-  var myVars = d3.map(data, function(d){return d.variable;}).keys()
+  // get variables from CSV
+  console.log(data)
+
+  var myStars = d3.map(data, function(d){return d.stars;}).keys()
+  var myPrice = d3.map(data, function(d){return d.price;}).keys()
+  var myRegions = d3.map(data, function(d){return d.region;}).keys()
 
   // Build X scales and axis:
   var x = d3.scaleBand()
     .range([ 0, width ])
-    .domain(myGroups)
+    .domain(myStars)
     .padding(0.05);
   svg.append("g")
     .style("font-size", 15)
@@ -33,7 +38,7 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
   // Build Y scales and axis:
   var y = d3.scaleBand()
     .range([ height, 0 ])
-    .domain(myVars)
+    .domain(myPrice)
     .padding(0.05);
   svg.append("g")
     .style("font-size", 15)
@@ -66,7 +71,7 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
   }
   var mousemove = function(d) {
     tooltip
-      .html("The exact value of<br>this cell is: " + d.value)
+      .html("The restaurant is located in the region of<br>: " + d.region)
       .style("left", (d3.mouse(this)[0]+70) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
@@ -80,16 +85,16 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
 
   // add the squares
   svg.selectAll()
-    .data(data, function(d) {return d.group+':'+d.variable;})
+    .data(data, function(d) {return d.stars+':'+d.price;})
     .enter()
     .append("rect")
-      .attr("x", function(d) { return x(d.group) })
-      .attr("y", function(d) { return y(d.variable) })
+      .attr("x", function(d) { return x(d.stars) })
+      .attr("y", function(d) { return y(d.price) })
       .attr("rx", 4)
       .attr("ry", 4)
       .attr("width", x.bandwidth() )
       .attr("height", y.bandwidth() )
-      .style("fill", function(d) { return myColor(d.value)} )
+      .style("fill", function(d) { return myColor(d.region)} )
       .style("stroke-width", 4)
       .style("stroke", "none")
       .style("opacity", 0.8)
@@ -114,4 +119,4 @@ svg.append("text")
         .style("font-size", "14px")
         .style("fill", "grey")
         .style("max-width", 400)
-        .text("Michelin Stars and Price Ratios in different regions.");
+        .text("Comparing price and Michelin stars within regions.");
