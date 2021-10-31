@@ -5,21 +5,13 @@ from flask import Flask, jsonify, render_template
 
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-from sqlalchemy.ext.automap import automap_base
+# from sqlalchemy.ext.automap import automap_base
 
-from sqlalchemy import Column, Integer, String, Float
+# from sqlalchemy import Column, Integer, String, Float
 
-import numpy as np
+# import numpy as np
 import pandas as pd
 
-#Base = automap_base()
-# reflect the tables
-#Base.prepare(engine, reflect=True)
-
-
-#michelin_data_df = Base.classes.restaurants
-
-#session = Session(bind=engine)
 
 #Flask Setup
 app = Flask(__name__)
@@ -42,11 +34,15 @@ def read_data():
     return x
 
 #List of stations
-@app.route("/print_data")
-def print_data():
+@app.route("/cuisine")
+def cuisine():
+    database_path = "Jupyter_Notebooks/bubble.db"
+    engine = create_engine(f"sqlite:///{database_path}")
+    conn = engine.connect()
+    data = pd.read_sql("SELECT * FROM bubble_db", conn)
 
-    
-    return jsonify()
+    x=data.to_json()
+    return x
 
 
 if __name__ == "__main__":
