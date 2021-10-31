@@ -1,3 +1,6 @@
+
+
+
 var coordinates = [52.52, 13.41];
 var z = 3;
 var myMap = L.map("map-id", {
@@ -21,34 +24,43 @@ function plotting_map(coordinates, z) {
     // Adding tile layer
 
 
-    d3.csv("./Data/combo-michelin-restaurants-stars.csv").then(function (data) {
+    d3.json("/read_data").then(function (data) {
 
-        console.log(data.length);
+        var count = Object.keys(data.Name).length
+        console.log(count);
+
         var resMarkers = [];
 
-        for (var i = 0; i < data.length; i++) {
-            var location = [data[i].latitude, data[i].longitude];
+        for (var i = 0; i < count; i++) {
+            var location = [data.Latitude[i], data.Longitude[i]];
             resMarkers.push(
-                L.marker(location).bindPopup("<h1>" + data[i].name + "<h2>" + data[i].city + "</h2>" + "</h1>" + "<br>" + "<h3>" + "Cuisine: " + data[i].cuisine + "</h3>" + "<h3>" + "Price: " + data[i].price + "</h3>" + "<a href=" + "'" + data[i].url + "'" + ">" + "Visit website" + "</a>")
+                L.marker(location).bindPopup("<h1>" + data.Name[i] + "<h2>" + data.City[i] + "</h2>" + "</h1>" + "<br>" + "<h3>" + "Cuisine: " + data.Cuisine[i] + "</h3>" + "<h3>" + "Price: " + data.Price[i] + "</h3>" + "<a href=" + "'" + data.URL[i] + "'" + ">" + "Visit website" + "</a>")
             );
         };
 
+
+
         var resLayer = L.layerGroup(resMarkers).addTo(myMap);
+
         //var overlayMaps = {
-         //   Restaurants: resLayer
+        //   Restaurants: resLayer
         //};
 
         //Take myMap out and add resLayer to myMap. return center coordinates and zoom in an object 
 
-    });
-    var obj={"coordinates": coordinates,
-             "zoom": z};
-    return obj;
+        var obj = {
+            "coordinates": coordinates,
+            "zoom": z
+        };
+        return obj;
+
+    })
 };
 
 
 
 plotting_map(coordinates, z);
+
 
 
 document.body.addEventListener("click", function (e) {
@@ -58,7 +70,7 @@ document.body.addEventListener("click", function (e) {
         x = e.target.innerText;
         console.log(x);
         var cdt = [];
-        var flag=0;
+        var flag = 0;
         switch (x) {
             case "Los Angeles":
                 console.log("Hello");
@@ -75,9 +87,9 @@ document.body.addEventListener("click", function (e) {
                 cdt = [41.88, -87.63];
                 break;
             //case "United Kingdom & Ireland":
-                //console.log("Hello");
-                //cdt = [33.52, -86.81];
-                //break;
+            //console.log("Hello");
+            //cdt = [33.52, -86.81];
+            //break;
             case "Oslo":
                 console.log("Hello");
                 cdt = [59.91, 10.75];
@@ -89,8 +101,8 @@ document.body.addEventListener("click", function (e) {
                 cdt = [55.68, 12.57];
                 break;
             case "Central & Eastern Europe":
-                cdt=[46.06, 14.51];
-                flag=2;
+                cdt = [46.06, 14.51];
+                flag = 2;
                 break;
             case "Rio de Janeiro":
                 cdt = [-22.91, -43.71];
@@ -100,7 +112,7 @@ document.body.addEventListener("click", function (e) {
                 break;
             case "Bangkok":
                 console.log("Hello");
-                cdt=[13.75, 100.50];
+                cdt = [13.75, 100.50];
                 break;
             case "Hong Kong":
                 cdt = [22.32, 114.17];
@@ -116,27 +128,24 @@ document.body.addEventListener("click", function (e) {
                 break;
             default:
                 cdt = coordinates;
-                flag=1;
-                
+                flag = 1;
+
 
         }
         //plotting_map(cdt, 10);
-        if (flag==1){
-            myMap.setView(cdt,3);
+        if (flag == 1) {
+            myMap.setView(cdt, 3);
         }
-        else if (flag==2){
-            myMap.setView(cdt,6);
+        else if (flag == 2) {
+            myMap.setView(cdt, 6);
         }
-        else{
-            myMap.setView(cdt,10);
+        else {
+            myMap.setView(cdt, 10);
         }
-        
+
 
 
     }
 
 });
-//console.log(cdt)
 
-
-//console.log(cdt);
