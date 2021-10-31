@@ -12,20 +12,30 @@ var svg = d3.select("#my_dataviz")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
 //Connect to database not the CSV
-d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
+// engine = create_engine("sqlite:///Jupyter_Notebooks/restaurants.db",connect_args={'check_same_thread': False}) 
+// Base = automap_base()
+// Base.prepare(engine,reflect=True)
 
+//Add the tables
+//restaurants=Base.classes.restaurants
+//Read the data
+
+d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
-  // get variables from CSV
+  // get variables from separate Pandas dataframe
   console.log(data)
 
-  var myStars = d3.map(data, function(d){return d.stars;}).keys()
+  var myStars = d3.map(data, function(d){return d.Stars;}).keys()
+  console.log(myStars)
   var myPrice = d3.map(data, function(d){return d.price;}).keys()
-  var myRegions = d3.map(data, function(d){return d.region;}).keys()
+  console.log(myPrice)
+  //var myRegion = d3.map(data, function(d){return d.region;}).keys()
+
+  var StarPriceCount = d3.map(data, function(d){return d.price;}).keys()
 
   // Build X scales and axis:
-  var x = d3.scaleBand()
+  var xscale = d3.scaleBand()
     .range([ 0, width ])
     .domain(myStars)
     .padding(0.05);
@@ -36,7 +46,7 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
     .select(".domain").remove()
 
   // Build Y scales and axis:
-  var y = d3.scaleBand()
+  var yscale = d3.scaleBand()
     .range([ height, 0 ])
     .domain(myPrice)
     .padding(0.05);
@@ -49,6 +59,7 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
   var myColor = d3.scaleSequential()
     .interpolator(d3.interpolateInferno)
     .domain([1,100])
+
 
   // create a tooltip
   var tooltip = d3.select("#my_dataviz")
@@ -71,7 +82,7 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
   }
   var mousemove = function(d) {
     tooltip
-      .html("The restaurant is located in the region of<br>: " + d.region)
+      .html("Number of restaurants with combination of stars & price<br>: " + d.region)
       .style("left", (d3.mouse(this)[0]+70) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
@@ -85,16 +96,16 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
 
   // add the squares
   svg.selectAll()
-    .data(data, function(d) {return d.stars+':'+d.price;})
+    .data(data, function(d) {return d.Stars+':'+d.price;})
     .enter()
     .append("rect")
-      .attr("x", function(d) { return x(d.stars) })
-      .attr("y", function(d) { return y(d.price) })
+      .attr("x", function(d) { return xscale(d.Stars) })
+      .attr("y", function(d) { return yscale(d.price) })
       .attr("rx", 4)
       .attr("ry", 4)
-      .attr("width", x.bandwidth() )
-      .attr("height", y.bandwidth() )
-      .style("fill", function(d) { return myColor(d.region)} )
+      .attr("width", xscale.bandwidth() )
+      .attr("height", yscale.bandwidth() )
+      .style("fill", function(d) { return myColor(d.StarPriceCount)} )
       .style("stroke-width", 4)
       .style("stroke", "none")
       .style("opacity", 0.8)
@@ -103,13 +114,14 @@ d3.csv("Data/combo-michelin-restaurants-stars.csv", function(data) {
     .on("mouseleave", mouseleave)
 })
 
+
 // Add title to graph
 svg.append("text")
         .attr("x", 0)
         .attr("y", -50)
         .attr("text-anchor", "left")
         .style("font-size", "22px")
-        .text("A d3.js heatmap");
+        .text("Heatmap using d3.js");
 
 // Add subtitle to graph
 svg.append("text")
