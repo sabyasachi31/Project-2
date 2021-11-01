@@ -8,3 +8,19 @@ body,
 html {
   height: 100%;
 }
+
+.selector {
+  background-image: linear-gradient(white, black);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;  /* <- here it is */
+
+  width: 100px;
+  height: 100px;
+}
+
+#fullpage {
+  max-height: 100%;
+  margin: 0px;
+  min-width: 100%;
+}

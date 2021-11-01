@@ -1,17 +1,8 @@
 import sqlalchemy
 import json
-from flask import Flask, jsonify, render_template
-#from sqlalchemy.ext.declarative import declarative_base
-
-from sqlalchemy.orm import Session
+from flask import Flask, render_template
 from sqlalchemy import create_engine, func
-# from sqlalchemy.ext.automap import automap_base
-
-# from sqlalchemy import Column, Integer, String, Float
-
-# import numpy as np
 import pandas as pd
-
 
 #Flask Setup
 app = Flask(__name__)
@@ -33,26 +24,20 @@ def read_data():
     x=data.to_json()
     return x
 
-#List of stations
-@app.route("/cuisine")
-def cuisine():
-    database_path = "Jupyter_Notebooks/bubble.db"
-    engine = create_engine(f"sqlite:///{database_path}")
-    conn = engine.connect()
-    data = pd.read_sql("SELECT * FROM bubble_db", conn)
+#Route 2
+@app.route("/heat.html")
+def heat():
+    return render_template("heat.html")
 
-    x=data.to_json()
-    return x
+#Route 3
+@app.route("/bubble.html")
+def bubble():
+    return render_template("bubble.html")
 
-@app.route("/heatmap")
-def heatmap():
-    database_path = "Jupyter_Notebooks/heatmap.db"
-    engine = create_engine(f"sqlite:///{database_path}")
-    conn = engine.connect()
-    data = pd.read_sql("SELECT * FROM heatmap_db", conn)
-
-    x=data.to_json()
-    return x
+#Route 4
+@app.route("/map.html")
+def map():
+    return render_template("map.html")
 
 
 if __name__ == "__main__":

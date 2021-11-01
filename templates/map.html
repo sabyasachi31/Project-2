@@ -16,7 +16,6 @@
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
   
-    
   </head>
   <body>
       
@@ -33,19 +32,19 @@
           <!-- <a class="navbar-brand" href="#"> Apply Filters</a> -->
 
           <!-- Cuisine Select  -->
-          <!-- <div class="row g-3">
-            <div class="col-6" id="enter_cuisine">
+          <div class="row g-3">
+            <!-- <div class="col-6" id="enter_cuisine">
               <input type="text" class="form-control" placeholder="Eg. Modern Cuisine" aria-label="Cuisine">
             </div> -->
                     
 
           <!-- Region Select  -->
-          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button> -->
+          </button>
 
           <!-- Region Select Continued  -->
-          <!-- <div class="col-6 collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <div class="col-6 collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,7 +67,7 @@
               </li>
             </ul>
           </div>
-          </div> -->
+          </div>
 
 
           <!-- Page Select (World, Heat, Cuisine) -->
@@ -93,53 +92,11 @@
           </div>
         </div>
     </nav>
+      
 
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-      <div class="col">
-        <div class="card">
-          <a href="https://en.wikipedia.org/wiki/Michelin_Guide">
-          <img src="static/images/michelin.jpeg" class="card-img-top" alt="...">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">Michelin Rating Info</h5>
-            <p class="card-text">Learn more about the history and what the Michelar star rating is all about.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <a href="map.html">
-          <img src="static/images/maps.jpeg" class="card-img-top" alt="...">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">Lets find them!</h5>
-            <p class="card-text">Locate them in specific regions of the world.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <a href="bubble.html">
-          <img src="static/images/cuisines.jpeg" class="card-img-top" alt="...">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">Explore cuisines</h5>
-            <p class="card-text">Find out which cuisines are more popular in Michelin star restaurants </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <a href="heat.html">
-          <img src="static/images/ratings.jpeg" class="card-img-top" alt="...">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">Ratings and Pricing</h5>
-            <p class="card-text">Understand the correlations between affordability and quality of restaurant </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- map div -->
+    <div id="map-id"></div>
+
    
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
@@ -147,17 +104,16 @@
     crossorigin=""></script>
 
     <!--Heatmap div-->
-    <!-- <div id="my_dataviz"></div> -->
+    <div id="my_dataviz"></div>
     <!--Load color palattes for heatmap-->
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <!-- API key -->
     <script type="text/javascript" src="static/js/config.js"></script>
       <!-- JS  -->
-    <!--<script type="text/javascript" src="static/js/logic-1.js"></script> -->
-    <script type="text/javascript" src="static/js/logic-1.js"></script>
-    <!-- <script type="text/javascript" src="static/js/bubble.js"></script> -->
-    <script type="text/javascript" src="static/js/heatmap.js"></script>
+
+      <script type="text/javascript" src="static/js/logic-1.js"></script>
+      <script type="text/javascript" src="static/js/heatmap.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   </body>

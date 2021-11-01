@@ -138,7 +138,7 @@ document.body.addEventListener("click", function (e) {
             myMap.setView(cdt, 6);
         }
         else {
-            myMap.setView(cdt, 10);
+            myMap.setView(cdt, 14);
         }
 
 
