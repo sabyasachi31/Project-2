@@ -1,6 +1,4 @@
 
-
-
 var coordinates = [52.52, 13.41];
 var z = 3;
 var myMap = L.map("map-id", {
@@ -34,7 +32,7 @@ function plotting_map(coordinates, z) {
         for (var i = 0; i < count; i++) {
             var location = [data.Latitude[i], data.Longitude[i]];
             resMarkers.push(
-                L.marker(location).bindPopup("<h1>" + data.Name[i] + "<h2>" + data.City[i] + "</h2>" + "</h1>" + "<br>" + "<h3>" + "Cuisine: " + data.Cuisine[i] + "</h3>" + "<h3>" + "Price: " + data.Price[i] + "</h3>" + "<a href=" + "'" + data.URL[i] + "'" + ">" + "Visit website" + "</a>")
+                L.marker(location).bindPopup("<h1>" + data.Name[i] + "<h2>" + data.City[i] + "</h2>" + "</h1>" + "<br>" + "<h3>" + "Cuisine: " + data.Cuisine[i] + "</h3>" + "<h3>" + "Pricing Level: " + data.Price[i] + "</h3>" + "<a href=" + "'" + data.URL[i] + "'" + ">" + "Visit website" + "</a>")
             );
         };
 
@@ -149,3 +147,23 @@ document.body.addEventListener("click", function (e) {
 
 });
 
+
+var button = d3.select("#enter_cuisine");
+button.on("click", runCuisine);
+
+function runCuisine() {
+
+    // Prevent the page from refreshing
+    d3.event.preventDefault();
+  
+    // Select the input element and get the raw HTML node
+    var inputElement = d3.select("#enter_cuisine");
+  
+    // Get the value property of the input element
+    var inputValue = inputElement.property("value");
+    console.log(inputValue)
+
+    //var filteredData = data.filter(x => x.Cuisine === inputValue);
+    //console.log(filteredData);
+    
+  };

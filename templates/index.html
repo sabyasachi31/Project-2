@@ -21,31 +21,56 @@
   </head>
   <body>
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Select Region
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> Apply Filters</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Los Angeles</a></li>
-          <li><a class="dropdown-item" href="#">San Francisco</a></li>
-          <li><a class="dropdown-item" href="#">New York</a></li>
-          <li><a class="dropdown-item" href="#">Chicago</a></li>
-          <!-- <li><a class="dropdown-item" href="#">United Kingdom & Ireland</a></li> -->
-          <li><a class="dropdown-item" href="#">Central & Eastern Europe</a></li>
-          <li><a class="dropdown-item" href="#">Athens</a></li>
-          <li><a class="dropdown-item" href="#">Oslo</a></li>
-          <li><a class="dropdown-item" href="#">Helsinki</a></li>
-          <li><a class="dropdown-item" href="#">Copenhagen</a></li>
-          <li><a class="dropdown-item" href="#">Rio de Janeiro</a></li>
-          <!-- <li><a class="dropdown-item" href="#">Bangkok</a></li> -->
-          <!-- <li><a class="dropdown-item" href="#">Hong Kong</a></li> -->
-          <li><a class="dropdown-item" href="#">Taipei</a></li>
-          <!-- <li><a class="dropdown-item" href="#">Seoul</a></li> -->
-          <!-- <li><a class="dropdown-item" href="#">Singapore</a></li> -->
-          <li><a class="dropdown-item" href="#">Back to World Map</a></li>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Region
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Los Angeles</a></li>
+                <li><a class="dropdown-item" href="#">San Francisco</a></li>
+                <li><a class="dropdown-item" href="#">New York</a></li>
+                <li><a class="dropdown-item" href="#">Chicago</a></li>
+                <!-- <li><a class="dropdown-item" href="#">United Kingdom & Ireland</a></li> -->
+                <li><a class="dropdown-item" href="#">Central & Eastern Europe</a></li>
+                <li><a class="dropdown-item" href="#">Athens</a></li>
+                <li><a class="dropdown-item" href="#">Oslo</a></li>
+                <li><a class="dropdown-item" href="#">Helsinki</a></li>
+                <li><a class="dropdown-item" href="#">Copenhagen</a></li>
+                <li><a class="dropdown-item" href="#">Rio de Janeiro</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Bangkok</a></li> -->
+                <!-- <li><a class="dropdown-item" href="#">Hong Kong</a></li> -->
+                <li><a class="dropdown-item" href="#">Taipei</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Seoul</a></li> -->
+                <!-- <li><a class="dropdown-item" href="#">Singapore</a></li> -->
+                <li><a class="dropdown-item" href="#">Back to World Map</a></li>
+      
+              </ul>
+            </li>
+          </ul>
+        </div>
 
-        </ul>
+        <div class="row g-3">
+          <div class="col-15" id="enter_cuisine">
+            <label>Enter a Cuisine</label>
+            <input type="text" class="form-control" placeholder="Eg. Modern Cuisine" aria-label="Cuisine">
+          </div>
+        </div>
+
+
+
+
+
       </div>
+    </nav>
+      
 
     <!-- map div -->
     <div id="map-id"></div>
