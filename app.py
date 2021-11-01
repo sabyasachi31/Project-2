@@ -44,6 +44,16 @@ def cuisine():
     x=data.to_json()
     return x
 
+@app.route("/heatmap")
+def heatmap():
+    database_path = "Jupyter_Notebooks/heatmap.db"
+    engine = create_engine(f"sqlite:///{database_path}")
+    conn = engine.connect()
+    data = pd.read_sql("SELECT * FROM heatmap_db", conn)
+
+    x=data.to_json()
+    return x
+
 
 if __name__ == "__main__":
     app.run(debug=True)
